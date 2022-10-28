@@ -1,12 +1,16 @@
-package com.example.fractaltrees;
+/** Forfattet av Dmitriy Safiullin, 240833@usn.no */
+
+package dmisa.fraktaltraer;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -86,7 +90,7 @@ public class HelloApplication extends Application {
 
         // sender verdier til lagTre metode i TreKanvas.java
         genererTreKnapp.setOnAction(e -> {
-            Color tempFarge = Color.rgb((int) (Math.random() * 255), (int) (Math.random() * 255),  (int)(Math.random() * 255));
+            Color tempFarge = tilfeldigFarge();
             if (tg.getSelectedToggle() == r1) tempFarge = fargeVelger.getValue();
             tegnerute.lagTre(
                     grenLengdeSlider.getValue(),
@@ -114,7 +118,7 @@ public class HelloApplication extends Application {
             vinkelTilfeldighetsSlider.setValue(Math.random() * vinkelTilfeldighetsSlider.getMax());
             antGrenTxt.setText( Integer.toString( (int) (Math.random() * 5 + 0.5)) );
             antRekTxt.setText( Integer.toString( (int) (Math.random() * 15 + 0.5)) );
-            Color tempFarge = Color.rgb((int) (Math.random() * 255), (int) (Math.random() * 255),  (int)(Math.random() * 255));
+            Color tempFarge = tilfeldigFarge();
             if (tg.getSelectedToggle() == r1) tempFarge = fargeVelger.getValue();
             tegnerute.lagTre(
                     grenLengdeSlider.getValue(),
@@ -131,10 +135,18 @@ public class HelloApplication extends Application {
         });
 
         // viser vinduet
-        Scene scene = new Scene(borderpane, 1200, 1000);
+        int x = 1200;
+        int y = 1000;
+        Scene scene = new Scene(borderpane, x, y);
         stage.setTitle("Lag fraktaltrær!");
         stage.setScene(scene);
+        Rectangle2D hovedSkjerm = Screen.getPrimary().getBounds();
+        if (hovedSkjerm.getWidth() * 0.9 < x || hovedSkjerm.getHeight() * 0.9 < y) stage.setMaximized(true);
         stage.show();
+    }
+
+    public Color tilfeldigFarge() {
+        return Color.rgb((int) (Math.random() * 255), (int) (Math.random() * 255),  (int)(Math.random() * 255));
     }
 
     public static void main(String[] args) {

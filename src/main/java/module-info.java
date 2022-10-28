@@ -1,8 +1,8 @@
-module com.example.fractaltrees {
+module dmisa.fraktaltraer {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens com.example.fractaltrees to javafx.fxml;
-    exports com.example.fractaltrees;
+    opens dmisa.fraktaltraer to javafx.fxml;
+    exports dmisa.fraktaltraer;
 }
